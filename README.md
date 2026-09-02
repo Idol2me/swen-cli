@@ -194,11 +194,13 @@ Swen isn't here to replace Git where complexity is genuinely needed. It's here t
 Contributions are welcome! Here's how:
 
 1. Fork this repository
-2. Create a branch: `git checkout -b feature/amazing-feature`
+2. Create a branch: `swen clone your-fork` (or use `git checkout -b feature/amazing-feature` if you're feeling old-school 😏)
 3. Make your changes and test them
-4. Commit: `git commit -m 'Add amazing feature'`
-5. Push: `git push origin feature/amazing-feature`
-6. Open a Pull Request
+4. Commit with Swen: `swen add src/ --push` ⚡
+   - **Or** if you're still stuck in the Git era: `git add . && git commit -m 'Add amazing feature' && git push` (takes 3x longer, but hey, who's counting? 🐢)
+5. Open a Pull Request
+
+> **Pro tip:** Once you go Swen, you never go back. Your terminal will thank you, and your 2 a.m. self will buy you coffee. ☕✨
 
 ---
 
