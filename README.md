@@ -1,6 +1,6 @@
 <div align="center">
 
-![Swen Logo](https://cdn.discordapp.com/attachments/1515659881028517989/1544504421180768316/AD75ED3D-12E6-4B95-BE5F-D61CE3889B2D.png?ex=6a98bf55&is=6a976dd5&hm=7b5e30504498d759d9fc49b351b2c11bd386f4dadf879768641beb9b093025d1)
+<img src="https://cdn.discordapp.com/attachments/1515659881028517989/1544504421180768316/AD75ED3D-12E6-4B95-BE5F-D61CE3889B2D.png?ex=6a98bf55&is=6a976dd5&hm=7b5e30504498d759d9fc49b351b2c11bd386f4dadf879768641beb9b093025d1" alt="Swen Logo" width="120" height="120" style="border-radius: 20px;">
 
 # ⚡ Swen
 
