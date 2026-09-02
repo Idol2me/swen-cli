@@ -10,7 +10,7 @@ Goodbye, Git bureaucracy.
 
 ![Status](https://img.shields.io/badge/status-in%20development-yellow)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Language](https://img.shields.io/badge/language-Lua-2C2D72)
+![Language](https://img.shields.io/badge/language-C-00599C)
 
 </div>
 
@@ -24,7 +24,7 @@ Traditional Git is powerful, but it comes with a lot of overhead: complex config
 
 - 🚫 **Zero `.gitignore`** — forget listing what you *don't* want to track.
 - ✅ **`pushme.sw`** — you explicitly declare **only what matters**. Everything else is ignored by default.
-- ⚡ **Performance first** — content-addressable storage, with no unnecessary overhead.
+- ⚡ **Performance first** — blazingly fast, built in C with content-addressable storage.
 
 ---
 
@@ -82,7 +82,7 @@ Create a `pushme.sw` file at the root of your project listing the files and fold
 
 ```text
 src/
-main.lua
+main.c
 README.md
 safe/
 ```
@@ -90,10 +90,92 @@ safe/
 ### 2. Track and ship in a single command
 
 ```bash
-swen add main.lua --push
+swen add main.c --push
 ```
 
 No separate `git add`, `git commit`, and `git push` — Swen handles the basic cycle in one call.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Language | C (ANSI C / C99) |
+| Paradigm | High-performance CLI |
+| Storage | Content-addressable storage (hash-based) |
+| Build System | Make |
+
+---
+
+## 📥 Installation & Building
+
+### Prerequisites
+- GCC or Clang
+- Make
+- POSIX-compatible system (Linux, macOS, BSD)
+
+### Build from Source
+
+```bash
+git clone https://github.com/Idol2me/swen-cli.git
+cd swen-cli
+make
+make install  # Optional: install to /usr/local/bin
+```
+
+### Run
+```bash
+./build/swen --help
+```
+
+---
+
+## 📂 Project Architecture
+
+```
+swen-cli/
+├── src/
+│   ├── main.c          # Entry point and command router
+│   ├── config.c        # Parses pushme.sw
+│   ├── core.c          # Hash engine & state management
+│   ├── commands.c      # CLI commands (add, clone, snapshot)
+│   └── utils.c         # Utility functions
+├── include/
+│   ├── swen.h          # Main header
+│   ├── config.h        # Config declarations
+│   ├── core.h          # Core declarations
+│   ├── commands.h      # Command declarations
+│   └── utils.h         # Utility declarations
+├── build/              # Compiled binaries (created by make)
+├── Makefile            # Build configuration
+├── pushme.sw           # Project's opt-in manifest
+├── README.md           # This file
+└── LICENSE             # MIT License
+```
+
+| File | Responsibility |
+|------|----------------|
+| `src/main.c` | CLI entry point and command routing |
+| `src/config.c` | Reads and validates `pushme.sw` |
+| `src/core.c` | Hash calculation, processing, and `.swen/` state |
+| `src/commands.c` | Implementation of `add`, `clone`, `snapshot` commands |
+| `src/utils.c` | Helper functions and utilities |
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] `add` command with `--push now` flag
+- [ ] `clone` command with global search
+- [ ] `snapshot` command (time travel)
+- [ ] Push Blacklist (critical folders)
+- [ ] `.env` leak protection
+- [ ] `safe/` vault functionality
+- [ ] Push size sanity sensor
+- [ ] Smart shutdown via `Ctrl+C`
+- [ ] Performance optimization
+- [ ] Cross-platform support (Windows)
 
 ---
 
@@ -107,52 +189,16 @@ Swen isn't here to replace Git where complexity is genuinely needed. It's here t
 
 ---
 
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Language | Lua / LuaJIT |
-| Paradigm | High-performance CLI |
-| Storage | Content-addressable storage (hash-based) |
-
----
-
-## 📂 Project Architecture
-
-```text
-swen/
-├── main.lua          # CLI entry point and command router
-├── src/
-│   ├── config.lua     # Reads and validates pushme.sw
-│   └── core.lua        # Hashing engine and state management (.swen/)
-└── pushme.sw         # The project's opt-in manifest
-```
-
-| File | Responsibility |
-|---|---|
-| `main.lua` | Entry point and command routing |
-| `src/config.lua` | Reading and validating `pushme.sw` |
-| `src/core.lua` | Hash calculation, processing engine, and state in `.swen/` |
-
----
-
-## 🗺️ Roadmap
-
-- [ ] `add` command with `--push now` flag support
-- [ ] `clone` command with global search by name
-- [ ] `snapshot` command (time travel via countdown)
-- [ ] Push Blacklist (critical system folders)
-- [ ] `.env` leak protection
-- [ ] `safe/` vault
-- [ ] Push size sanity sensor
-- [ ] Smart shutdown via `Ctrl+C`
-- [ ] Publish via LuaRocks
-
----
-
 ## 🤝 Contributing
 
-Contributions are welcome! Open an issue to discuss ideas, or send a pull request directly.
+Contributions are welcome! Here's how:
+
+1. Fork this repository
+2. Create a branch: `git checkout -b feature/amazing-feature`
+3. Make your changes and test them
+4. Commit: `git commit -m 'Add amazing feature'`
+5. Push: `git push origin feature/amazing-feature`
+6. Open a Pull Request
 
 ---
 
