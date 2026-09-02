@@ -1,14 +1,18 @@
 <div align="center">
 
+![Swen Logo](https://cdn.discordapp.com/attachments/1515659881028517989/1544504421180768316/AD75ED3D-12E6-4B95-BE5F-D61CE3889B2D.png)
+
 # ⚡ Swen
 
 **The version control system built for speed, human intent, and zero friction with the terminal.**
 
-Goodbye, Git bureaucracy.
+*Goodbye, Git bureaucracy.*
 
-![Status](https://img.shields.io/badge/status-in%20development-yellow)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Language](https://img.shields.io/badge/language-Lua-2C2D72)
+[![Status](https://img.shields.io/badge/status-in%20development-yellow?style=for-the-badge)](https://github.com/Idol2me/swen-cli)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](./LICENSE)
+[![Language](https://img.shields.io/badge/language-Lua-2C2D72?style=for-the-badge)](https://www.lua.org/)
+
+[Installation](#-installation) • [Features](#-key-features) • [Usage](#-how-to-use) • [Contributing](#-contributing)
 
 </div>
 
@@ -16,90 +20,94 @@ Goodbye, Git bureaucracy.
 
 ## 🚀 The Problem Swen Solves
 
-Traditional Git is powerful, but it comes with a lot of overhead: complex configuration, giant `.gitignore` files where you have to guess what to exclude, and a command flow that isn't always intuitive.
+Traditional Git is powerful, but it comes with **overhead**:
+- ❌ Complex configuration files
+- ❌ Giant `.gitignore` files (guessing what to exclude)
+- ❌ Unintuitive command flow
+- ❌ Friction for micro-tasks and quick prototypes
 
-**Swen** flips that logic with an **opt-in** approach:
+**Swen** flips this with an **opt-in** approach:
 
-- 🚫 **Zero `.gitignore`** — forget listing what you *don't* want to track.
-- ✅ **`pushme.sw`** — you explicitly declare **only what matters**. Everything else is ignored by default.
-- ⚡ **Performance first** — content-addressable storage, with no unnecessary overhead.
+| Feature | Git | Swen |
+|---------|-----|------|
+| Configuration | `.gitignore` (opt-out) | `pushme.sw` (opt-in) ✅ |
+| Bureaucracy | Multiple commands | Single command ⚡ |
+| Speed | Standard | Content-addressable storage 🚀 |
+| Default behavior | Track everything | Ignore everything (safe) 🛡️ |
 
 ---
 
-## 📦 Key Commands and Features
+## 📦 Key Features
 
-### 1. Create and ship projects — `swen add / --push now`
-
-- **Goodbye GitHub Web:** no more opening the browser, creating an empty repo, copying a giant URL, and pasting it into the terminal.
-- **Instant magic:** with a single command, Swen creates the repository, sets everything up, and ships your code.
-
+### ✨ 1. Instant Project Creation & Shipping
 ```bash
 swen add . --push now
 ```
+- **No browser nonsense** — forget opening GitHub, creating an empty repo, and copying URLs
+- **One command, everything done** — creates repo, configures everything, ships your code
 
-### 2. Smart cloning — `swen clone`
-
-- **Global search by name:** want to clone one of your projects, or a public one? Just type the name:
-
-  ```bash
-  swen clone Pedrinho-Projects
-  ```
-
-  Swen finds it and pulls it down for you.
-
-- **Precise mode:** for private repos or repos in other organizations, just paste the full URL as usual.
-
-### 3. Time travel with intent — `swen snapshot`
-
-- **Goodbye cryptic hashes and `HEAD` math:** instead of commands like `git reset --soft HEAD~1`, you use an intuitive countdown.
-
+### 🔍 2. Smart Cloning
 ```bash
-swen snapshot 1   # goes back 1 commit in time, keeping your code on screen for editing
+swen clone project-name          # Global search by name
+swen clone https://github.com... # Or use full URL for precision
 ```
+- Search by name across your projects and public repos
+- Instant downloads without manual setup
 
-No database-infrastructure jargon from Git.
+### ⏮️ 3. Time Travel with Intent
+```bash
+swen snapshot 1   # Go back 1 commit, keep code for editing
+swen snapshot 5   # Go back 5 commits
+```
+- **Intuitive countdown** — no cryptic `git reset --soft HEAD~1`
+- Keep your working changes while exploring history
 
-### 4. Security by default (protection against mistakes)
+### 🛡️ 4. Security by Default
+- **Push Blacklist** — blocks accidental commits to critical system folders (`/etc`, Windows System32, etc.)
+- **`.env` Leak Protection** — auto-blocks environment files (stops API key leaks from Gemini, AWS, Google Cloud, etc.)
+- **`safe/` Vault** — isolated folder for private files, never pushed or exposed
+- **Size Sanity Sensor** — warns before committing massive files/directories (50GB `node_modules`, etc.)
 
-- **Push Blacklist:** a built-in blacklist that instantly blocks accidental attempts to commit critical system folders (`/etc`, the Linux/Mac root, Windows system directories) or your entire `home` (`~`).
-- **`.env` leak protection:** automatically blocks environment files, so you never lose money to leaked API keys again (Gemini, AWS, Google Cloud, etc.).
-- **The `safe/` vault:** an isolated folder declared in `pushme.sw` where you keep private files that Swen will never pull or expose.
-- **Size sanity sensor:** if you're about to accidentally commit 50 GB (a giant `node_modules`, or an entire disk), it stops and warns you.
-
-### 5. Smart shutdown — `Ctrl+C`
-
-When you close or interrupt the process, Swen gives you a quick, friendly prompt asking whether you want to discard drafts, save to a private repository, or consolidate your changes.
+### 🎯 5. Smart Shutdown
+Press `Ctrl+C` and choose:
+- 📝 Discard drafts
+- 💾 Save to private repo
+- 🔄 Consolidate changes
 
 ---
 
-## 💻 How to Use (basic flow)
+## 💻 How to Use (Basic Flow)
 
-### 1. Declare what matters
-
-Create a `pushme.sw` file at the root of your project listing the files and folders that should be tracked:
+### Step 1: Declare What Matters
+Create a `pushme.sw` file at your project root:
 
 ```text
 src/
 main.lua
 README.md
 safe/
+package.json
 ```
 
-### 2. Track and ship in a single command
-
+### Step 2: Track & Ship
 ```bash
-swen add main.lua --push
+swen add . --push
 ```
-
-No separate `git add`, `git commit`, and `git push` — Swen handles the basic cycle in one call.
+That's it! No `git add`, `git commit`, `git push` dance.
 
 ---
 
-## ☕ A quick word for senior devs
+## ☕ A Word for Senior Devs
 
-Sticking with Git on the company's legacy monoliths is one thing. Losing 2 minutes creating an empty repo in the browser just to test a script at 2 a.m. is another.
+**Git is amazing for complex monoliths and large teams.**
 
-Swen isn't here to replace Git where complexity is genuinely needed. It's here to remove friction from micro-tasks, prototypes, and everyday automation.
+But losing 2 minutes to browser clicks for a quick script at 2 a.m.? That's friction Swen removes.
+
+**Swen isn't here to replace Git** — it's here to eliminate friction from:
+- 🚀 Micro-tasks and quick prototypes
+- 🧪 Automation scripts
+- 🎯 Everyday workflows
+- ⚡ Personal projects
 
 **Less bureaucracy, more code.**
 
@@ -107,53 +115,110 @@ Swen isn't here to replace Git where complexity is genuinely needed. It's here t
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Language | Lua / LuaJIT |
-| Paradigm | High-performance CLI |
-| Storage | Content-addressable storage (hash-based) |
+| Component | Technology |
+|-----------|-----------|
+| **Language** | Lua / LuaJIT |
+| **Type** | High-performance CLI |
+| **Storage** | Content-addressable (hash-based) |
+| **Philosophy** | Opt-in tracking, zero friction |
 
 ---
 
 ## 📂 Project Architecture
 
-```text
-swen/
-├── main.lua          # CLI entry point and command router
+```
+swen-cli/
+├── main.lua              # Entry point & command router
 ├── src/
-│   ├── config.lua     # Reads and validates pushme.sw
-│   └── core.lua        # Hashing engine and state management (.swen/)
-└── pushme.sw         # The project's opt-in manifest
+│   ├── config.lua        # Parses & validates pushme.sw
+│   ├── core.lua          # Hash engine & state management
+│   ├── commands.lua      # CLI command implementations
+│   └── utils.lua         # Utilities & helpers
+├── tests/                # Test suite
+├── pushme.sw             # Project's opt-in manifest
+├── README.md             # This file
+└── LICENSE               # MIT License
 ```
 
 | File | Responsibility |
-|---|---|
-| `main.lua` | Entry point and command routing |
-| `src/config.lua` | Reading and validating `pushme.sw` |
-| `src/core.lua` | Hash calculation, processing engine, and state in `.swen/` |
+|------|----------------|
+| `main.lua` | CLI entry point and command routing |
+| `src/config.lua` | Reads and validates `pushme.sw` |
+| `src/core.lua` | Hash calculation, processing, and `.swen/` state |
+| `src/commands.lua` | Implementation of `add`, `clone`, `snapshot` commands |
+
+---
+
+## 📥 Installation
+
+### Prerequisites
+- Lua 5.1+ or LuaJIT
+
+### From Source
+```bash
+git clone https://github.com/Idol2me/swen-cli.git
+cd swen-cli
+lua main.lua --help
+```
+
+### Via LuaRocks (Coming Soon)
+```bash
+luarocks install swen
+```
 
 ---
 
 ## 🗺️ Roadmap
 
-- [ ] `add` command with `--push now` flag support
-- [ ] `clone` command with global search by name
-- [ ] `snapshot` command (time travel via countdown)
-- [ ] Push Blacklist (critical system folders)
+- [ ] `add` command with `--push now` flag
+- [ ] `clone` command with global search
+- [ ] `snapshot` command (time travel)
+- [ ] Push Blacklist (critical folders)
 - [ ] `.env` leak protection
-- [ ] `safe/` vault
+- [ ] `safe/` vault functionality
 - [ ] Push size sanity sensor
 - [ ] Smart shutdown via `Ctrl+C`
-- [ ] Publish via LuaRocks
+- [ ] Publish to LuaRocks
+- [ ] Web dashboard (optional)
+- [ ] Multi-user collaboration
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Open an issue to discuss ideas, or send a pull request directly.
+We love contributions! Here's how to get started:
+
+1. **Fork** this repository
+2. **Create a branch** for your feature: `git checkout -b feature/amazing-feature`
+3. **Make your changes** and test them
+4. **Commit** with clear messages: `git commit -m 'Add amazing feature'`
+5. **Push** to your fork: `git push origin feature/amazing-feature`
+6. **Open a Pull Request** and describe your changes
+
+### Issues & Discussions
+- 🐛 Found a bug? [Open an issue](https://github.com/Idol2me/swen-cli/issues)
+- 💡 Have an idea? [Start a discussion](https://github.com/Idol2me/swen-cli/discussions)
 
 ---
 
 ## 📄 License
 
-Distributed under the MIT license. See [`LICENSE`](./LICENSE) for more details.
+This project is licensed under the **MIT License** — see the [`LICENSE`](./LICENSE) file for details.
+
+---
+
+## 💬 Support
+
+- 📖 **Docs**: Check the [wiki](https://github.com/Idol2me/swen-cli/wiki)
+- 💬 **Discord**: Join our community server
+- 🐛 **Issues**: [Report bugs here](https://github.com/Idol2me/swen-cli/issues)
+
+---
+
+<div align="center">
+
+**Made with ❤️ by [Idol2me](https://github.com/Idol2me)**
+
+⭐ If you find Swen useful, please consider giving it a star!
+
+</div>
